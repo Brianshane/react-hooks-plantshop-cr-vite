@@ -1,6 +1,16 @@
 import React from "react";
+import PlantPage from "./PlantPage";
+function NewPlantForm(newPlant){
+    fetch(API_URL,{
+    method :"POST" ,
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(newPlant)
+  })
+  .then(response => { if(!response.ok){throw new Error("could not add new item")}
+    return response.json()})
 
-function NewPlantForm() {
+  .then(data =>{setPlants([...plants ,data])})
+  .catch(err => console.error(err))
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
